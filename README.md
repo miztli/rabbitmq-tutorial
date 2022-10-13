@@ -14,3 +14,21 @@ ssh -p 5672 localhost
 Default username: `guest`
 
 Default password: `guest`
+
+### Start producer instance
+
+```shell
+mvn spring-boot:run
+```
+
+### Start consumer instance(s)
+
+```shell
+mvn spring-boot:run
+```
+
+If we need to simulate several instances, we need to override the `application.properties server.port` to avoid collisions
+
+```shell
+mvn spring-boot:run -Dspring-boot.run.arguments=--server.port=8082
+```
