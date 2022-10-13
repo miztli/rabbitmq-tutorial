@@ -27,8 +27,8 @@ public class AppConfig {
         factory.setPassword("guest");
         factory.setPort(5672);
         factory.setConnectionTimeout(3000);
-        factory.setAutomaticRecoveryEnabled(true);
-        factory.setTopologyRecoveryEnabled(true);
+        factory.setAutomaticRecoveryEnabled(true); //
+        factory.setTopologyRecoveryEnabled(true); //
 
         return factory;
     }
@@ -36,8 +36,12 @@ public class AppConfig {
     @Bean
     public Channel subscribeToQueue(final ConnectionFactory factory, final ConsumerService consumerService)
             throws IOException, TimeoutException {
+        // try-with resources isn't used here, since we don't want the connection to be closed
         final var channel = factory.newConnection().createChannel();
 
+        // durable: should the queue survive a server restart?
+        // exclusive: queue should be exclusive to this connection?
+        // autoDelete: will be removed by server, when no longer in use
         channel.queueDeclare(QUEUE_NAME, false, false, false, null);
         channel.basicConsume(QUEUE_NAME, true, consumerService.onMessageReceived(), consumerTag -> {});
 
