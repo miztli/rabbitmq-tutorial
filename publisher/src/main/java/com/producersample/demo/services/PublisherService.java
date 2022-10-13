@@ -24,7 +24,7 @@ public class PublisherService {
 
     public void publishMessage(final String message) throws IOException {
         channel.queueDeclare(QUEUE_NAME, false, false, false, null);
-        channel.basicPublish(EXCHANGE, message, null, message.getBytes());
+        channel.basicPublish(EXCHANGE, QUEUE_NAME, null, message.getBytes());
         LOG.info("Message [{}] sent to exchange [{}] - queue [{}]", message, DEFAULT_EXCHANGE, QUEUE_NAME);
     }
 }
