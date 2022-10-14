@@ -36,7 +36,7 @@ mvn spring-boot:run -Dspring-boot.run.arguments=--server.port=8082
 ## Working queues
 
 ### Auto-acknowledge
-- Demo commit: `87d9947670344812519e0757ea347ca5672b597f`
+- Demo commit: `6e94987cc34555771df9be78edfb683720952407`
 - Setup: 
 
 producer **->** _exchange:_ default ("")
@@ -51,7 +51,7 @@ _NOTES:_
 - Notice we're using `autoAck=true` every time we consume a message
 
 ### Manual-acknowledge
-- Demo commit: `b5aeb9b2d4a1a1bdc9b5622a23f49152dde696cf`
+- Demo commit: `222adb572c36c69fe62ae7020df2777ea7e13249`
 
 _NOTES_
 - With our current code, once RabbitMQ delivers a message to the consumer it immediately marks it for deletion. In this case, if you kill a worker we will lose the message it was just processing.
