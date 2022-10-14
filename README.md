@@ -51,9 +51,10 @@ _NOTES:_
 - Notice we're using `autoAck=true` every time we consume a message
 
 ### Manual-acknowledge
-- Demo commit: `e7739527da0e722098c525d577f32c61e9aaeee4`
+- Demo commit: `b5aeb9b2d4a1a1bdc9b5622a23f49152dde696cf`
 
 _NOTES_
 - With our current code, once RabbitMQ delivers a message to the consumer it immediately marks it for deletion. In this case, if you kill a worker we will lose the message it was just processing.
 - Manual acknowledgments are useful to let the server know we have successfully processed a message and it's free to delete it.
 - If server doesn't receive an acknowledgment message, then it'll re-queue the message and deliver it to the next available consumer. A timeout (30 minutes by default) is enforced on consumer delivery acknowledgment. How to modify the default timeout can be consulted [here](https://www.rabbitmq.com/consumers.html#acknowledgement-timeout)
+- Set property `consumer.processingTimeInSeconds=30` and stop the consumer to see message is redelivered to the other instance of our application: `mvn spring-boot:run -Dspring-boot.run.arguments="--server.port=8081 --consumer.processingTimeInSeconds=30"`

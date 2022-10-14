@@ -4,6 +4,7 @@ import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.DeliverCallback;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
@@ -29,6 +30,9 @@ public class ConsumerService {
     @Resource
     private Channel channel;
 
+    @Value(value = "${consumer.processingTimeInSeconds}")
+    private long processingTimeInSeconds;
+
     public List<String> fetchMessages() {
         LOG.info("Fetching messages. List size [{}]", consumedMessages.size());
         return consumedMessages;
@@ -38,9 +42,18 @@ public class ConsumerService {
         return (consumerTag, delivery) -> {
             final var message = new String(delivery.getBody(), StandardCharsets.UTF_8);
             final var deliveryTag = delivery.getEnvelope().getDeliveryTag();
+
             LOG.info("Received message [{}] - delivery tag [{}]", message, deliveryTag);
+            try {
+                LOG.info("Processing estimated time... [{}] seconds", processingTimeInSeconds);
+                Thread.sleep(processingTimeInSeconds*1000);
+            } catch (InterruptedException e) {
+                LOG.error(e.getMessage(), e);
+            }
+
             consumedMessages.add(message);
             channel.basicAck(deliveryTag, false);
+            LOG.info("Message processed with deliveryTag [{}]", deliveryTag);
         };
     }
 
