@@ -58,3 +58,10 @@ _NOTES_
 - Manual acknowledgments are useful to let the server know we have successfully processed a message and it's free to delete it.
 - If server doesn't receive an acknowledgment message, then it'll re-queue the message and deliver it to the next available consumer. A timeout (30 minutes by default) is enforced on consumer delivery acknowledgment. How to modify the default timeout can be consulted [here](https://www.rabbitmq.com/consumers.html#acknowledgement-timeout)
 - Set property `consumer.processingTimeInSeconds=30` and stop the consumer to see message is redelivered to the other instance of our application: `mvn spring-boot:run -Dspring-boot.run.arguments="--server.port=8081 --consumer.processingTimeInSeconds=30"`
+
+### Pre-fetch
+- Demo commit: `19a2c185014175f3870d728f46537cf01d082090`
+
+_NOTES_
+- Allows the consumer to tell the server to send not more than `n` number of messages at a time, before the server receives the acknowledgment from the client.
+- Be aware about the que size in this case, because it may become full if there's no enough consumers for all the messages
