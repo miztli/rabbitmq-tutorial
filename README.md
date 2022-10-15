@@ -76,7 +76,7 @@ _NOTES_
 - Allows the consumer to tell the server to send not more than `n` number of messages at a time, before the server receives the acknowledgment from the client.
 - Be aware about the que size in this case, because it may become full if there's no enough consumers for all the messages
 
-### Exchanges & Bindings
+## Exchanges & Bindings
 
 - Demo commit: `a6b44834e572872021c59d28c5ba98dd7bce3e1b`
 
@@ -86,3 +86,13 @@ _NOTES_
 
   - fanout: Broadcasts all the messages it receives to all the queues it knows.
 - The relationship between a queue and an exchange is called: BINDING
+
+### Pendings
+- Use rabbitmqctl for debugging purposes
+- Document exchange types
+- Make app start without rabbitmq running instance?
+
+#### Resources
+
+- [rabbitMQ tutorials](https://www.rabbitmq.com/tutorials)
+- [rabbitMQ docs](https://www.rabbitmq.com/documentation.html)
