@@ -1,0 +1,4 @@
+com/consumersample/demo/config/AppConfig.class
+com/consumersample/demo/controllers/ConsumerController.class
+com/consumersample/demo/services/ConsumerService.class
+com/consumersample/demo/DemoApplication.class
