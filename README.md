@@ -3,7 +3,7 @@
 ### Start RabbitMQ instance
 
 ```shell
-docker run -d --hostname my-rabbit --name miztli-rabbit-mq-server -p 5672:5672 rabbitmq:3
+docker run -d --hostname my-rabbit --name rabbit-mq-management -e RABBITMQ_DEFAULT_USER=user -e RABBITMQ_DEFAULT_PASS=password -e RABBITMQ_DEFAULT_VHOST=my_vhost -p 5672:5672 -p 15672:15672 rabbitmq:3-management
 ```
 
 Now let's test rabbitmq is listening for incoming connections:
