@@ -20,8 +20,9 @@ public class AppConfig {
         final var factory = new ConnectionFactory();
 
         factory.setHost("localhost");
-        factory.setUsername("guest");
-        factory.setPassword("guest");
+        factory.setUsername("user");
+        factory.setPassword("password");
+        factory.setVirtualHost("my_vhost");
         factory.setPort(5672);
         factory.setConnectionTimeout(3000);
         factory.setAutomaticRecoveryEnabled(true); //
