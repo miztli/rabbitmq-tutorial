@@ -1,5 +1,6 @@
 package com.producersample.demo.services;
 
+import com.producersample.demo.dto.Message;
 import com.rabbitmq.client.BuiltinExchangeType;
 import com.rabbitmq.client.Channel;
 import org.slf4j.Logger;
@@ -24,9 +25,12 @@ public class PublisherService {
     @Resource
     private Channel channel;
 
-    public void publishMessage(final String message) throws IOException {
-        channel.basicPublish(EXCHANGE, IGNORED_QUEUE_NAME, null, message.getBytes());
-        LOG.info("Message [{}] sent to exchange [{}] - queue [{}]", message, EXCHANGE, IGNORED_QUEUE_NAME);
+    public void publishMessage(final Message message) throws IOException {
+        for (int i = 0; i < message.getTimes(); i++) {
+            final var text = String.format("%s [%s]", message.getMessage(), i);
+            channel.basicPublish(EXCHANGE, IGNORED_QUEUE_NAME, null, text.getBytes());
+            LOG.info("Message [{}] sent to exchange [{}] - queue [{}]", text, EXCHANGE, IGNORED_QUEUE_NAME);
+        }
     }
 
     @PostConstruct
