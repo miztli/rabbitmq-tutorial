@@ -94,5 +94,6 @@ _NOTES_
 
 #### Resources
 
+- [docker image](https://hub.docker.com/_/rabbitmq)
 - [rabbitMQ tutorials](https://www.rabbitmq.com/tutorials)
 - [rabbitMQ docs](https://www.rabbitmq.com/documentation.html)
