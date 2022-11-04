@@ -3,4 +3,4 @@
 *.iml
 
 #compiled sources
-*/target/*
+target/
